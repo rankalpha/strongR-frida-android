@@ -12,6 +12,7 @@ jobs:
     outputs:
       FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
+      
     steps:
       - name: Pull Frida Latest Release
         id: pullFridaLatestRelease
@@ -29,6 +30,7 @@ jobs:
             core.setOutput('FRIDA_VERSION', ver);
             console.log(releaseResponse);
             console.log(ver);
+            
       - name: Check release version
         id: checkReleaseVersion
         uses: actions/github-script@v3.1.0
@@ -59,12 +61,11 @@ jobs:
                 core.setFailed(e.message);
               }
             }
-
-
+            
   create_release:
     needs: check_version
     runs-on: ubuntu-20.04
-    if: needs.check_version.outputs.ALREADY_RELEASE == '0'
+    #if: needs.check_version.outputs.ALREADY_RELEASE == '0'
 
     steps:
       - uses: actions/create-release@master
