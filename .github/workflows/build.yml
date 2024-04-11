@@ -27,7 +27,7 @@ jobs:
               data: { tag_name: ver }
             } = releaseResponse;
             core.setOutput('FRIDA_VERSION', ver);
-            console.log(eleaseResponse);
+            console.log(releaseResponse);
             console.log(ver);
       - name: Check release version
         id: checkReleaseVersion
